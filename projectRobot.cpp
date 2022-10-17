@@ -61,7 +61,7 @@ void loop() {
     
     lightsReady(); //checks and runs a function if the lights are coming on or not
 
-  } if (digitalRead(irSensor) == LOW && digitalRead(irSensor_2) == LOW) {   //evaluating the state of each IR sensor
+  } else if (digitalRead(irSensor) == LOW && digitalRead(irSensor_2) == LOW) {   //evaluating the state of each IR sensor
     Serial.print("No line found, actuate motors to move to the line"); //print statement to state the robots action
 
     digitalWrite(in1, HIGH); //motor 1 on forward direction
@@ -72,7 +72,7 @@ void loop() {
     digitalWrite(enB, speedcap); //send pwm for speed
     
     lightsReady(); //checks and runs a function if the lights are coming on or not
-  } if (digitalRead(irSensor) == HIGH && digitalRead(irSensor_2) == LOW) {   //evaluating the state of each IR sensor
+  } else if (digitalRead(irSensor) == HIGH && digitalRead(irSensor_2) == LOW) {   //evaluating the state of each IR sensor
     Serial.print("Line found on left side of the robot, so turn the robot, and navigate to the black line"); //print statement to state the robots action
 
     digitalWrite(in1, HIGH); //motor 1 on forward direction (right motor)
@@ -84,7 +84,7 @@ void loop() {
     
     lightsReady(); //checks and runs a function if the lights are coming on or not
 
-  } if (digitalRead(irSensor) == LOW && digitalRead(irSensor_2) == LOW) {   //evaluating the state of each IR sensor
+  } else if (digitalRead(irSensor) == LOW && digitalRead(irSensor_2) == LOW) {   //evaluating the state of each IR sensor
     Serial.print("Line found on the right side of the robot, turn right and navigate to the line"); //print statement to state the robots action
 
     digitalWrite(in1, LOW); 
@@ -114,12 +114,16 @@ void loop() {
 
 //Section of the code regarding flashing led's and ultrasonic sensor
 void lightsReady() {
-    while (distance <= 25) {
-    digitalWrite(redLight, HIGH); //red led light flashes on
-    delay(400); //wait a small time before changing color
-    digitalWrite(redLight, LOW); //red led turns off
-    digitalWrite(blueLight, HIGH); //blue led light flashes on
-    delay(400); //wait a small time before changing color
-    digitalWrite(blueLight, LOW); //blue led turns off
+    if (distance <= 25) {
+      int x = 0;
+      while (x < 6) {
+        digitalWrite(redLight, HIGH); //red led light flashes on
+        delay(400); //wait a small time before changing color
+        digitalWrite(redLight, LOW); //red led turns off
+        digitalWrite(blueLight, HIGH); //blue led light flashes on
+        delay(400); //wait a small time before changing color
+        digitalWrite(blueLight, LOW); //blue led turns off
+        x += 1;
+      }
     }
   }
