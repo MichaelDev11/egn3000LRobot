@@ -47,8 +47,8 @@ void setup() {
 }
 
 void loop() {
-  irLeft_state = analogRead(irSensor_left);
-  irRight_state = analogRead(irSensor_right);
+  irLeft_state = analogRead(irSensor_left); //Reading left IR sensor
+  irRight_state = analogRead(irSensor_right); //Reading right IR sensor
   
   if (irRight_state > 500 && irLeft_state < 500){ //Turn right
     digitalWrite (in1,HIGH);
